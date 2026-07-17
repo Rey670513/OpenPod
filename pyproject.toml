@@ -20,3 +20,7 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+[project.scripts]
+openpod = "openpod.__main__:main"
+[project.scripts]
+openpod = "openpod.__main__:main"
