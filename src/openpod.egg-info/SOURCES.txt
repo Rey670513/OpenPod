@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/openpod/__init__.py
+src/openpod/__main__.py
+src/openpod.egg-info/PKG-INFO
+src/openpod.egg-info/SOURCES.txt
+src/openpod.egg-info/dependency_links.txt
+src/openpod.egg-info/top_level.txt
