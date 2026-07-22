@@ -1,0 +1,2 @@
+[console_scripts]
+openpod = openpod.__main__:main

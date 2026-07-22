@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: openpod
+Version: 0.1.0a1
+Summary: Open source SDK for Line 6 POD Go preset files.
+Author: Rey
+License: MIT
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+OpenPod/
+│
+├── LICENSE
+├── README.md
+├── pyproject.toml
+├── .gitignore
+│
+├── src/
+│   └── openpod/
+│       ├── __init__.py
+│       ├── core/
+│       ├── io/
+│       ├── explorer/
+│       ├── services/
+│       ├── registry/
+│       └── cli/
+│
+├── tests/
+│
+├── docs/
+│
+└── datasets/
