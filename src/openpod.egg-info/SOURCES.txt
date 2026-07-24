@@ -8,3 +8,10 @@ src/openpod.egg-info/SOURCES.txt
 src/openpod.egg-info/dependency_links.txt
 src/openpod.egg-info/entry_points.txt
 src/openpod.egg-info/top_level.txt
+src/openpod/parser/__init__.py
+src/openpod/parser/binary.py
+src/openpod/parser/header.py
+src/openpod/parser/preset.py
+tests/test_import.py
+tests/test_preset.py
+tests/test_public_api.py
