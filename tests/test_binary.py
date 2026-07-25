@@ -23,8 +23,6 @@ def test_read_string():
 
 def test_remaining():
     reader = BinaryReader(b"\x01\x02\x03")
-
     reader.read_u8()
-
     assert reader.remaining() == 2
     

@@ -12,6 +12,6 @@ def test_metadata():
 
     assert metadata.name == "Test"
     assert metadata.application == "POD Go Edit"
-    from openpod.Models.metadata import Metadata
-    from openpod.models.metadata import Metadata
+    assert metadata.app_version == 1
+    assert metadata.build_sha == "abc123"
     
