@@ -53,7 +53,13 @@ class BinaryReader:
     def read_float(self) -> float:
         return struct.unpack("<f", self.read_bytes(4))[0]
 
-    def read_string(self, size: int, encoding="utf-8") -> str:
+    def read_string(self, size: int, encoding: str = "utf-8") -> str:
         raw = self.read_bytes(size)
         return raw.split(b"\x00", 1)[0].decode(encoding)
+
+    def peek(self, size: int) -> bytes:
+        pos = self.tell()
+        data = self.read_bytes(size)
+        self.seek(pos)
+        return data
     

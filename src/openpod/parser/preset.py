@@ -20,4 +20,9 @@ class Preset:
     @property
     def raw(self) -> bytes:
         return self._data
-    
+
+    def summary(self) -> str:
+    return (
+        f"Preset\n"
+        f"Size : {self.size} bytes"
+    )
