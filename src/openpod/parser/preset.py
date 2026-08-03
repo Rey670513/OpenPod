@@ -22,7 +22,8 @@ class Preset:
         return self._data
 
     def summary(self) -> str:
-    return (
-        f"Preset\n"
-        f"Size : {self.size} bytes"
-    )
+        return (
+            f"Preset\n"
+            f"Size : {self.size} bytes"
+        )
+    

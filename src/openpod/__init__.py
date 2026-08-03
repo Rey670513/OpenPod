@@ -7,8 +7,10 @@ Open source SDK for Line 6 POD Go preset files.
 __version__ = "0.1.0a1"
 
 from .parser import Preset
+from .editor import PresetEditor
 
 __all__ = [
     "__version__",
     "Preset",
+    "PresetEditor",
 ]
