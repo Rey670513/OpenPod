@@ -1,0 +1,9 @@
+from openpod.editor import PresetEditor
+
+preset = PresetEditor("Richie Sambora.pgp")
+
+print("Nama preset :", preset.name)
+
+preset.save("ModernRock.pgp")
+
+print("File berhasil disimpan.")
