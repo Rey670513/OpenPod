@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from .amp import Amp
+from .cab import Cab
 
 
 class PresetEditor:
@@ -23,6 +24,12 @@ class PresetEditor:
             self.data["data"]["tone"]["dsp0"]["block3"]
         )
 
+    @property
+    def cab(self):
+        return Cab(
+            self.data["data"]["tone"]["dsp0"]["block4"]
+        )
+
     def save(self, filename):
         Path(filename).write_text(
             json.dumps(
@@ -30,4 +37,3 @@ class PresetEditor:
                 indent=1
             )
         )
-        
