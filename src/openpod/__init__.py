@@ -13,4 +13,10 @@ __all__ = [
     "__version__",
     "Preset",
     "PresetEditor",
+    "ModernRock",
 ]
+
+from .generator import ModernRock
+
+
+
