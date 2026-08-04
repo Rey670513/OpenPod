@@ -3,6 +3,7 @@ from pathlib import Path
 
 from .amp import Amp
 from .cab import Cab
+from .snapshot import Snapshot
 
 
 class PresetEditor:
@@ -29,6 +30,17 @@ class PresetEditor:
         return Cab(
             self.data["data"]["tone"]["dsp0"]["block4"]
         )
+
+    @property
+    def snapshots(self):
+        tone = self.data["data"]["tone"]
+
+        return [
+            Snapshot(tone["snapshot0"]),
+            Snapshot(tone["snapshot1"]),
+            Snapshot(tone["snapshot2"]),
+            Snapshot(tone["snapshot3"]),
+        ]
 
     def save(self, filename):
         Path(filename).write_text(
