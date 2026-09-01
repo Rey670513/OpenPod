@@ -1,3 +1,5 @@
+from .parameter import Parameter
+
 class Block:
     """
     Base editor for POD Go DSP blocks.
@@ -44,3 +46,9 @@ class Block:
 
     def __setitem__(self, parameter, value):
         self.set(parameter, value)
+
+    def parameter(self, name):
+        if name not in self.parameters:
+            raise KeyError(name)
+
+        return Parameter(self, name)
