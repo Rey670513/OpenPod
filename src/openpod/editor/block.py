@@ -38,3 +38,9 @@ class Block:
             raise KeyError(parameter)
 
         self._block[parameter] = value
+
+    def __getitem__(self, parameter):
+        return self.get(parameter)
+
+    def __setitem__(self, parameter, value):
+        self.set(parameter, value)
