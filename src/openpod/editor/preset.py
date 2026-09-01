@@ -1,3 +1,7 @@
+from .amp import Amp
+from .cab import Cab
+from .snapshot import Snapshot
+from .block import Block
 import json
 from pathlib import Path
 
@@ -31,6 +35,15 @@ class PresetEditor:
             self.data["data"]["tone"]["dsp0"]["block4"]
         )
 
+    @property
+    def blocks(self):
+        dsp0 = self.data["data"]["tone"]["dsp0"]
+
+        return [
+            Block(block)
+            for key, block in dsp0.items()
+            if key.startswith("block")
+        ]
     @property
     def snapshots(self):
         tone = self.data["data"]["tone"]
