@@ -44,6 +44,14 @@ class PresetEditor:
             for key, block in dsp0.items()
             if key.startswith("block")
         ]
+
+    def find_model(self, model):
+        for block in self.blocks:
+            if block.model == model:
+                return block
+
+        raise KeyError(model)
+
     @property
     def snapshots(self):
         tone = self.data["data"]["tone"]
