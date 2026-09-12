@@ -11,6 +11,10 @@ class Parameter:
     def value(self):
         return self._block.get(self.name)
 
+    @value.setter
+    def value(self, value):
+        self._block.set(self.name, value)
+
     @property
     def type(self):
         return type(self.value)
