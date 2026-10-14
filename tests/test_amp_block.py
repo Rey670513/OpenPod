@@ -20,7 +20,7 @@ def test_amp_rejects_drive_outside_normalized_range(value):
     preset = PresetEditor("Richie Sambora.pgp")
     original_drive = preset.amp.drive
 
-    with pytest.raises(ValueError, match="between 0.0 and 1.0"):
+    with pytest.raises(ValueError):
         preset.amp.drive = value
 
     assert preset.amp.drive == original_drive

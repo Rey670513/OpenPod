@@ -110,3 +110,15 @@ def test_snapshot_allows_generic_parameter_values_above_one():
     preset.snapshots[1].set_parameter(cab, "HighCut", 12000.0)
 
     assert preset.snapshots[1].get_parameter(cab, "HighCut") == 12000.0
+
+
+def test_snapshot_rejects_non_finite_generic_value_without_mutating():
+    preset = PresetEditor("Richie Sambora.pgp")
+    snapshot = preset.snapshots[1]
+    cab = preset.cab
+
+    with pytest.raises(ValueError, match="finite"):
+        snapshot.set_parameter(cab, "HighCut", float("inf"))
+
+    assert snapshot._data["@valid"] is False
+    assert "controller" not in snapshot._data

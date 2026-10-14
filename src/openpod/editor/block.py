@@ -1,3 +1,6 @@
+import math
+from numbers import Real
+
 from .parameter import Parameter
 
 class Block:
@@ -43,7 +46,9 @@ class Block:
         self._block[parameter] = value
 
     def validate_parameter_value(self, parameter, value):
-        """Validate a parameter value when the block type defines known limits."""
+        """Reject non-finite numbers; subclasses may enforce known limits."""
+        if isinstance(value, Real) and not math.isfinite(value):
+            raise ValueError(f"{parameter} must be a finite number")
 
     def __getitem__(self, parameter):
         return self.get(parameter)

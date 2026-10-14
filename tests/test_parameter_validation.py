@@ -1,5 +1,7 @@
 import pytest
 
+import pytest
+
 from openpod.editor import PresetEditor
 
 
@@ -33,3 +35,15 @@ def test_parameter_type_updates_after_value_change():
 
     assert parameter.value == 1
     assert parameter.type is int
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf")])
+def test_block_rejects_non_finite_numeric_values(value):
+    preset = PresetEditor("Richie Sambora.pgp")
+    delay = preset.find_model("HD2_DelayElephantManStereo")
+    original_mix = delay.get("Mix")
+
+    with pytest.raises(ValueError, match="finite"):
+        delay.set("Mix", value)
+
+    assert delay.get("Mix") == original_mix

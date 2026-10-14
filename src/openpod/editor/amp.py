@@ -28,6 +28,7 @@ class Amp(Block):
         super().__init__(block)
 
     def validate_parameter_value(self, parameter, value):
+        super().validate_parameter_value(parameter, value)
         if parameter not in self.NORMALIZED_PARAMETERS:
             return
 

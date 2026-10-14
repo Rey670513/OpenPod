@@ -55,7 +55,8 @@ parameter to the Snapshots controller and give that snapshot its own value.
 Block parameter values use the numeric scale stored in the preset (for example,
 Amp controls such as Drive are typically between `0.0` and `1.0`. The typed
 `Amp` editor rejects non-finite or out-of-range values for its normalized
-controls. Generic block parameters keep their model-specific native scales.
+controls. Generic block parameters keep their model-specific native scales and
+reject non-finite numbers; OpenPod does not guess undocumented parameter bounds.
 
 ## Work with blocks
 
