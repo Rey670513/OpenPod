@@ -3,9 +3,12 @@ Amp editor.
 """
 
 
-class Amp:
+from .block import Block
+
+
+class Amp(Block):
     def __init__(self, block):
-        self._block = block
+        super().__init__(block)
 
     @property
     def model(self):
@@ -58,4 +61,4 @@ class Amp:
     @master.setter
     def master(self, value):
         self._block["Master"] = float(value)
-        
+
