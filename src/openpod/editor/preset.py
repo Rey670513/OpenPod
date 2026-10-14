@@ -20,6 +20,10 @@ class PresetEditor:
     def name(self):
         return self.data["data"]["meta"]["name"]
 
+    @name.setter
+    def name(self, value):
+        self.data["data"]["meta"]["name"] = str(value)
+
     @property
     def amp(self):
         return Amp(
