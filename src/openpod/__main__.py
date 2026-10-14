@@ -1,6 +1,21 @@
 import argparse
+import json
+from pathlib import Path
 
 from openpod import __version__
+from openpod.editor import PresetEditor
+
+
+def _inspect(filename):
+    preset = PresetEditor(filename)
+    print(f"Preset: {preset.name}")
+    print("Blocks:")
+    for block in preset.blocks:
+        state = "enabled" if block.enabled else "bypassed"
+        print(f"  {block.model or 'Unknown model'} ({state})")
+    print("Snapshots:")
+    for index, snapshot in enumerate(preset.snapshots, start=1):
+        print(f"  {index}. {snapshot.name}")
 
 
 def main():
@@ -28,7 +43,14 @@ def main():
     if args.command == "inspect":
         if not args.filename:
             parser.error("inspect membutuhkan nama file.")
-        print(f"Inspecting: {args.filename}")
+        try:
+            _inspect(args.filename)
+        except FileNotFoundError:
+            parser.error(f"file tidak ditemukan: {args.filename}")
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            parser.error(f"JSON preset tidak valid: {args.filename}")
+        except (KeyError, TypeError) as error:
+            parser.error(f"struktur preset tidak valid: {error}")
         return
 
     parser.print_help()
@@ -36,4 +58,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
