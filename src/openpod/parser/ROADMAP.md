@@ -8,7 +8,7 @@
 - [x] Block parser (JSON representation)
 
 ## v0.4.0-alpha
-- [ ] Snapshot parser
+- [x] Snapshot parser (JSON representation)
 
 ## v1.0.0
 - [ ] Read presets

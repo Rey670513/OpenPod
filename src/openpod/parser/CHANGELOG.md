@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Parser that builds context-aware snapshot editors from JSON preset data
 - Parser that maps JSON DSP slots to typed block editors
 - Parser for metadata fields in JSON-formatted presets
 - CLI inspection of preset names, blocks, and snapshots

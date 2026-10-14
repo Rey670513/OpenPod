@@ -3,7 +3,6 @@ from pathlib import Path
 
 from .amp import Amp
 from .cab import Cab
-from .snapshot import Snapshot
 
 
 class PresetEditor:
@@ -52,11 +51,9 @@ class PresetEditor:
     @property
     def snapshots(self):
         tone = self.data["data"]["tone"]
+        from openpod.parser.snapshot import SnapshotParser
 
-        return [
-            Snapshot(tone[f"snapshot{index}"], tone=tone, key=f"snapshot{index}")
-            for index in range(4)
-        ]
+        return SnapshotParser(tone).parse()
 
     def save(self, filename=None):
         target = self.filename if filename is None else Path(filename)
