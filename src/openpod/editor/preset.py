@@ -1,11 +1,8 @@
-from .amp import Amp
-from .cab import Cab
-from .snapshot import Snapshot
-from .block import Block
 import json
 from pathlib import Path
 
 from .amp import Amp
+from .block import Block
 from .cab import Cab
 from .snapshot import Snapshot
 
@@ -40,7 +37,7 @@ class PresetEditor:
         dsp0 = self.data["data"]["tone"]["dsp0"]
 
         return [
-            Block(block)
+            (Amp(block) if key == "block3" else Block(block))
             for key, block in dsp0.items()
             if key.startswith("block")
         ]
