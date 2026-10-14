@@ -40,6 +40,22 @@ def test_snapshot_parameter_assignment_uses_pod_go_controller():
     assert preset.data["data"]["tone"]["snapshot1"]["@valid"] is True
 
 
+def test_activating_unused_snapshot_inherits_base_block_bypass_states():
+    preset = PresetEditor("Richie Sambora.pgp")
+    tone = preset.data["data"]["tone"]
+
+    preset.snapshots[1].set_parameter(preset.amp, "Drive", 0.85)
+
+    snapshot_blocks = tone["snapshot1"]["blocks"]["dsp0"]
+    for key, block in tone["dsp0"].items():
+        if key.startswith("block"):
+            assert snapshot_blocks[key] is block["@enabled"]
+
+    # This preset's FX Loop block is off in its base state; an unused snapshot
+    # must not silently turn it on when the snapshot is first activated.
+    assert snapshot_blocks["block2"] is False
+
+
 def test_snapshot_rejects_unknown_block_parameter():
     preset = PresetEditor("Richie Sambora.pgp")
 

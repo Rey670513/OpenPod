@@ -41,6 +41,12 @@ class Snapshot:
         self._validate_parameter(block, name)
         block_key = self._block_key(block)
 
+        if not self._data.get("@valid", False):
+            snapshot_blocks = self._data.setdefault("blocks", {}).setdefault("dsp0", {})
+            for key, block_data in self._tone["dsp0"].items():
+                if key.startswith("block") and "@enabled" in block_data:
+                    snapshot_blocks[key] = block_data["@enabled"]
+
         # A parameter assigned to snapshots needs a value entry in every slot.
         # Unset slots inherit the block's current value until explicitly changed.
         snapshot_values = []
