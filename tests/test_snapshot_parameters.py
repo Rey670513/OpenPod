@@ -11,6 +11,11 @@ def test_snapshot_parameter_values_are_independent_and_persist(tmp_path):
 
     preset.snapshots[0].set_parameter(amp, "Drive", 0.4)
     preset.snapshots[1].set_parameter(amp, "Drive", 0.8)
+    preset.snapshots[2].set_parameter(amp, "Drive", 0.2)
+    preset.snapshots[3].set_parameter(amp, "Drive", 0.6)
+    preset.snapshots[1].name = "Lead"
+    preset.snapshots[2].name = "Rhythm"
+    preset.snapshots[3].name = "Clean"
     preset.save(output)
 
     reloaded = PresetEditor(output)
@@ -18,6 +23,9 @@ def test_snapshot_parameter_values_are_independent_and_persist(tmp_path):
 
     assert reloaded.snapshots[0].get_parameter(reloaded_amp, "Drive") == 0.4
     assert reloaded.snapshots[1].get_parameter(reloaded_amp, "Drive") == 0.8
+    assert reloaded.snapshots[2].get_parameter(reloaded_amp, "Drive") == 0.2
+    assert reloaded.snapshots[3].get_parameter(reloaded_amp, "Drive") == 0.6
+    assert all(snapshot._data["@valid"] for snapshot in reloaded.snapshots)
     assert reloaded_amp.drive == original_drive
 
 

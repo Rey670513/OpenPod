@@ -25,14 +25,20 @@ preset.name = "Soul Blues"
 preset.cab.level = -3.5
 preset.snapshots[0].set_parameter(preset.amp, "Drive", 3.5)
 preset.snapshots[1].set_parameter(preset.amp, "Drive", 6.5)
+preset.snapshots[2].set_parameter(preset.amp, "Drive", 2.0)
+preset.snapshots[3].set_parameter(preset.amp, "Drive", 5.0)
 preset.snapshots[1].name = "Lead"
+preset.snapshots[2].name = "Rhythm"
+preset.snapshots[3].name = "Clean"
 
 # Save a copy, keeping the input file unchanged.
 preset.save("soul-blues.pgp")
 ```
 
-`preset.snapshots` contains the four snapshots in order. Assigning to
-`preset.name` or a snapshot's `name` converts the value to a string. Calling
+`preset.snapshots` contains the four snapshots in order. The example assigns
+and names every slot so all four snapshots are enabled in the output preset.
+Assigning to `preset.name` or a snapshot's `name` converts the value to a
+string. Calling
 `preset.save()` without a filename writes changes back to the file that was
 loaded. Setting a value such as `preset.amp.drive` changes the block's shared
 base value. Use `snapshot.set_parameter(block, name, value)` to assign a
