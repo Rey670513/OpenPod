@@ -23,10 +23,10 @@ preset = PresetEditor("input.pgp")
 
 preset.name = "Soul Blues"
 preset.cab.level = -3.5
-preset.snapshots[0].set_parameter(preset.amp, "Drive", 3.5)
-preset.snapshots[1].set_parameter(preset.amp, "Drive", 6.5)
-preset.snapshots[2].set_parameter(preset.amp, "Drive", 2.0)
-preset.snapshots[3].set_parameter(preset.amp, "Drive", 5.0)
+preset.snapshots[0].set_parameter(preset.amp, "Drive", 0.35)
+preset.snapshots[1].set_parameter(preset.amp, "Drive", 0.65)
+preset.snapshots[2].set_parameter(preset.amp, "Drive", 0.2)
+preset.snapshots[3].set_parameter(preset.amp, "Drive", 0.5)
 preset.snapshots[1].name = "Lead"
 preset.snapshots[2].name = "Rhythm"
 preset.snapshots[3].name = "Clean"
@@ -43,6 +43,8 @@ string. Calling
 loaded. Setting a value such as `preset.amp.drive` changes the block's shared
 base value. Use `snapshot.set_parameter(block, name, value)` to assign a
 parameter to the Snapshots controller and give that snapshot its own value.
+Block parameter values use the numeric scale stored in the preset (for example,
+Amp Drive is typically between `0.0` and `1.0`).
 
 ## Work with blocks
 
