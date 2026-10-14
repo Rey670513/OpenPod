@@ -1,5 +1,6 @@
 from openpod.editor import PresetEditor
 from openpod.editor.amp import Amp
+from openpod.editor.cab import Cab
 
 
 def test_preset_blocks():
@@ -26,3 +27,11 @@ def test_preset_blocks_uses_typed_amp():
     amp = next(block for block in preset.blocks if block.model == preset.amp.model)
 
     assert isinstance(amp, Amp)
+
+
+def test_preset_blocks_uses_typed_cab():
+    preset = PresetEditor("Richie Sambora.pgp")
+
+    cab = next(block for block in preset.blocks if block.model == preset.cab.model)
+
+    assert isinstance(cab, Cab)

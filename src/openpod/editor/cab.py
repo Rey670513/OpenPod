@@ -2,14 +2,12 @@
 Cab editor.
 """
 
+from .block import Block
 
-class Cab:
+
+class Cab(Block):
     def __init__(self, block):
-        self._block = block
-
-    @property
-    def model(self):
-        return self._block["@model"]
+        super().__init__(block)
 
     @property
     def low_cut(self):
@@ -42,4 +40,4 @@ class Cab:
     @level.setter
     def level(self, value):
         self._block["Level"] = float(value)
-        
+

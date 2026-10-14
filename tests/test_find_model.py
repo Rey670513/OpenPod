@@ -1,6 +1,7 @@
 from openpod.editor import PresetEditor
 from openpod.editor.amp import Amp
 from openpod.editor.block import Block
+from openpod.editor.cab import Cab
 
 
 def test_find_existing_model():
@@ -31,3 +32,13 @@ def test_find_amp_model_returns_typed_amp():
     assert isinstance(amp, Amp)
     assert amp.data is preset.amp.data
     assert amp.model == preset.amp.model
+
+
+def test_find_cab_model_returns_typed_cab():
+    preset = PresetEditor("Richie Sambora.pgp")
+
+    cab = preset.find_model(preset.cab.model)
+
+    assert isinstance(cab, Cab)
+    assert cab.data is preset.cab.data
+    assert cab.model == preset.cab.model

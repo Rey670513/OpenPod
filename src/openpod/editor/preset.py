@@ -37,7 +37,11 @@ class PresetEditor:
         dsp0 = self.data["data"]["tone"]["dsp0"]
 
         return [
-            (Amp(block) if key == "block3" else Block(block))
+            (
+                Amp(block) if key == "block3"
+                else Cab(block) if key == "block4"
+                else Block(block)
+            )
             for key, block in dsp0.items()
             if key.startswith("block")
         ]
