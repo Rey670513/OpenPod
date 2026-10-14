@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Parser for metadata fields in JSON-formatted presets
 - CLI inspection of preset names, blocks, and snapshots
 - CLI JSON export that preserves the input file
 

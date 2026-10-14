@@ -1,7 +1,7 @@
 # OpenPod Roadmap
 
 ## v0.2.0-alpha
-- [ ] Metadata parser
+- [x] Metadata parser (JSON representation)
 - [x] Inspect command
 
 ## v0.3.0-alpha
