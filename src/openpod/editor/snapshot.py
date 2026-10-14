@@ -37,15 +37,32 @@ class Snapshot:
 
         return block.get(name)
 
-    def set_parameter(self, block, name, value):
-        self._validate_parameter(block, name)
+    def get_block_enabled(self, block):
+        self._validate_block(block)
         block_key = self._block_key(block)
 
         if not self._data.get("@valid", False):
-            snapshot_blocks = self._data.setdefault("blocks", {}).setdefault("dsp0", {})
-            for key, block_data in self._tone["dsp0"].items():
-                if key.startswith("block") and "@enabled" in block_data:
-                    snapshot_blocks[key] = block_data["@enabled"]
+            return block.enabled
+
+        return (
+            self._data.get("blocks", {})
+            .get("dsp0", {})
+            .get(block_key, block.enabled)
+        )
+
+    def set_block_enabled(self, block, enabled):
+        self._validate_block(block)
+        block_key = self._block_key(block)
+        self._initialize_block_states()
+
+        snapshot_blocks = self._data.setdefault("blocks", {}).setdefault("dsp0", {})
+        snapshot_blocks[block_key] = bool(enabled)
+        self._data["@valid"] = True
+
+    def set_parameter(self, block, name, value):
+        self._validate_parameter(block, name)
+        block_key = self._block_key(block)
+        self._initialize_block_states()
 
         # A parameter assigned to snapshots needs a value entry in every slot.
         # Unset slots inherit the block's current value until explicitly changed.
@@ -81,10 +98,22 @@ class Snapshot:
         }
 
     def _validate_parameter(self, block, name):
-        if not isinstance(block, Block):
-            raise TypeError("block must be a Block instance")
+        self._validate_block(block)
         if name not in block.parameters:
             raise KeyError(name)
+
+    def _validate_block(self, block):
+        if not isinstance(block, Block):
+            raise TypeError("block must be a Block instance")
+
+    def _initialize_block_states(self):
+        if self._data.get("@valid", False):
+            return
+
+        snapshot_blocks = self._data.setdefault("blocks", {}).setdefault("dsp0", {})
+        for key, block_data in self._tone["dsp0"].items():
+            if key.startswith("block") and "@enabled" in block_data:
+                snapshot_blocks[key] = block_data["@enabled"]
 
     def _block_key(self, block):
         if self._tone is None:

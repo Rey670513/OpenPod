@@ -56,6 +56,31 @@ def test_activating_unused_snapshot_inherits_base_block_bypass_states():
     assert snapshot_blocks["block2"] is False
 
 
+def test_snapshot_block_enabled_state_is_independent_and_persists(tmp_path):
+    preset = PresetEditor("Richie Sambora.pgp")
+    distortion = preset.find_model("HD2_DistScream808Mono")
+    output = tmp_path / "snapshot-bypass.pgp"
+
+    preset.snapshots[1].set_block_enabled(distortion, False)
+    preset.snapshots[2].set_block_enabled(distortion, True)
+    preset.save(output)
+
+    reloaded = PresetEditor(output)
+    reloaded_distortion = reloaded.find_model("HD2_DistScream808Mono")
+
+    assert reloaded.snapshots[1].get_block_enabled(reloaded_distortion) is False
+    assert reloaded.snapshots[2].get_block_enabled(reloaded_distortion) is True
+    assert reloaded_distortion.enabled is True
+    assert reloaded.snapshots[1]._data["@valid"] is True
+
+
+def test_unused_snapshot_block_state_reads_from_preset_base():
+    preset = PresetEditor("Richie Sambora.pgp")
+    fx_loop = preset.find_model("HD2_FXLoopMono1")
+
+    assert preset.snapshots[1].get_block_enabled(fx_loop) is False
+
+
 def test_snapshot_rejects_unknown_block_parameter():
     preset = PresetEditor("Richie Sambora.pgp")
 
