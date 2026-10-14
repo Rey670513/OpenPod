@@ -22,8 +22,9 @@ from openpod.editor import PresetEditor
 preset = PresetEditor("input.pgp")
 
 preset.name = "Soul Blues"
-preset.amp.drive = 4.25
 preset.cab.level = -3.5
+preset.snapshots[0].set_parameter(preset.amp, "Drive", 3.5)
+preset.snapshots[1].set_parameter(preset.amp, "Drive", 6.5)
 preset.snapshots[1].name = "Lead"
 
 # Save a copy, keeping the input file unchanged.
@@ -33,7 +34,9 @@ preset.save("soul-blues.pgp")
 `preset.snapshots` contains the four snapshots in order. Assigning to
 `preset.name` or a snapshot's `name` converts the value to a string. Calling
 `preset.save()` without a filename writes changes back to the file that was
-loaded.
+loaded. Setting a value such as `preset.amp.drive` changes the block's shared
+base value. Use `snapshot.set_parameter(block, name, value)` to assign a
+parameter to the Snapshots controller and give that snapshot its own value.
 
 ## Work with blocks
 

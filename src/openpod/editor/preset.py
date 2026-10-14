@@ -62,10 +62,8 @@ class PresetEditor:
         tone = self.data["data"]["tone"]
 
         return [
-            Snapshot(tone["snapshot0"]),
-            Snapshot(tone["snapshot1"]),
-            Snapshot(tone["snapshot2"]),
-            Snapshot(tone["snapshot3"]),
+            Snapshot(tone[f"snapshot{index}"], tone=tone, key=f"snapshot{index}")
+            for index in range(4)
         ]
 
     def save(self, filename=None):
