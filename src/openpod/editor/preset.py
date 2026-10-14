@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 
 from .amp import Amp
-from .block import Block
 from .cab import Cab
 from .snapshot import Snapshot
 
@@ -39,16 +38,9 @@ class PresetEditor:
     @property
     def blocks(self):
         dsp0 = self.data["data"]["tone"]["dsp0"]
+        from openpod.parser.block import BlockParser
 
-        return [
-            (
-                Amp(block) if key == "block3"
-                else Cab(block) if key == "block4"
-                else Block(block)
-            )
-            for key, block in dsp0.items()
-            if key.startswith("block")
-        ]
+        return BlockParser(dsp0).parse()
 
     def find_model(self, model):
         for block in self.blocks:

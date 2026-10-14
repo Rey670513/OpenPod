@@ -5,7 +5,7 @@
 - [x] Inspect command
 
 ## v0.3.0-alpha
-- [ ] Block parser
+- [x] Block parser (JSON representation)
 
 ## v0.4.0-alpha
 - [ ] Snapshot parser
