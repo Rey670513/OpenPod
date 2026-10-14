@@ -39,7 +39,11 @@ class Block:
         if parameter.startswith("@"):
             raise KeyError(parameter)
 
+        self.validate_parameter_value(parameter, value)
         self._block[parameter] = value
+
+    def validate_parameter_value(self, parameter, value):
+        """Validate a parameter value when the block type defines known limits."""
 
     def __getitem__(self, parameter):
         return self.get(parameter)

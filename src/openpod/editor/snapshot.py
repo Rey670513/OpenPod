@@ -61,6 +61,7 @@ class Snapshot:
 
     def set_parameter(self, block, name, value):
         self._validate_parameter(block, name)
+        block.validate_parameter_value(name, value)
         block_key = self._block_key(block)
         self._initialize_block_states()
 

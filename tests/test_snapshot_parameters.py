@@ -86,3 +86,27 @@ def test_snapshot_rejects_unknown_block_parameter():
 
     with pytest.raises(KeyError):
         preset.snapshots[0].set_parameter(preset.amp, "NotAParameter", 1.0)
+
+
+def test_snapshot_rejects_out_of_range_amp_value_without_mutating_preset():
+    preset = PresetEditor("Richie Sambora.pgp")
+    snapshot = preset.snapshots[1]
+    original = preset.data["data"]["tone"]
+    original_drive = preset.amp.drive
+
+    with pytest.raises(ValueError, match="between 0.0 and 1.0"):
+        snapshot.set_parameter(preset.amp, "Drive", 3.5)
+
+    assert preset.amp.drive == original_drive
+    assert snapshot._data["@valid"] is False
+    assert "controller" in original
+    assert "block3" not in original["controller"]["dsp0"]
+
+
+def test_snapshot_allows_generic_parameter_values_above_one():
+    preset = PresetEditor("Richie Sambora.pgp")
+    cab = preset.cab
+
+    preset.snapshots[1].set_parameter(cab, "HighCut", 12000.0)
+
+    assert preset.snapshots[1].get_parameter(cab, "HighCut") == 12000.0

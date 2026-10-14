@@ -53,7 +53,9 @@ loaded. Setting a value such as `preset.amp.drive` changes the block's shared
 base value. Use `snapshot.set_parameter(block, name, value)` to assign a
 parameter to the Snapshots controller and give that snapshot its own value.
 Block parameter values use the numeric scale stored in the preset (for example,
-Amp Drive is typically between `0.0` and `1.0`).
+Amp controls such as Drive are typically between `0.0` and `1.0`. The typed
+`Amp` editor rejects non-finite or out-of-range values for its normalized
+controls. Generic block parameters keep their model-specific native scales.
 
 ## Work with blocks
 
