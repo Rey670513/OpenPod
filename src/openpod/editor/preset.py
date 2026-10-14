@@ -68,8 +68,9 @@ class PresetEditor:
             Snapshot(tone["snapshot3"]),
         ]
 
-    def save(self, filename):
-        Path(filename).write_text(
+    def save(self, filename=None):
+        target = self.filename if filename is None else Path(filename)
+        target.write_text(
             json.dumps(
                 self.data,
                 indent=1
