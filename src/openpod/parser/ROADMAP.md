@@ -1,17 +1,20 @@
 # OpenPod Roadmap
 
 ## v0.2.0-alpha
-- Metadata parser
-- Inspect command
+- [ ] Metadata parser
+- [x] Inspect command
 
 ## v0.3.0-alpha
-- Block parser
+- [ ] Block parser
 
 ## v0.4.0-alpha
-- Snapshot parser
+- [ ] Snapshot parser
 
 ## v1.0.0
-- Read presets
-- Inspect presets
-- Export JSON
-- Write presets
+- [ ] Read presets
+- [x] Inspect presets (JSON representation)
+- [x] Export JSON (JSON representation)
+- [ ] Write presets
+
+The current editor and CLI work with JSON-formatted preset data. Parsing and
+writing the device's binary preset format remain open roadmap items.

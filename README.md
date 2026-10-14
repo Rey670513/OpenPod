@@ -14,6 +14,25 @@ From the repository root, install OpenPod in editable mode:
 python -m pip install -e .
 ```
 
+## Inspect and export from the command line
+
+After installing OpenPod, inspect a preset to see its name, blocks, and
+snapshots:
+
+```bash
+openpod inspect "input.pgp"
+```
+
+Export the preset data as formatted JSON while keeping the input file intact:
+
+```bash
+openpod export-json "input.pgp" "output.json"
+```
+
+Both commands report missing files and invalid preset JSON as command-line
+errors. The current editor and CLI read the JSON representation used by the
+included preset examples.
+
 ## Edit a preset
 
 ```python
