@@ -1,4 +1,5 @@
 import json
+import tempfile
 from pathlib import Path
 
 from .amp import Amp
@@ -57,9 +58,22 @@ class PresetEditor:
 
     def save(self, filename=None):
         target = self.filename if filename is None else Path(filename)
-        target.write_text(
-            json.dumps(
-                self.data,
-                indent=1
-            )
-        )
+        temp_path = None
+
+        try:
+            with tempfile.NamedTemporaryFile(
+                mode="w",
+                encoding="utf-8",
+                dir=target.parent,
+                prefix=f".{target.name}.",
+                suffix=".tmp",
+                delete=False,
+            ) as temp_file:
+                temp_path = Path(temp_file.name)
+                json.dump(self.data, temp_file, indent=1)
+                temp_file.flush()
+
+            temp_path.replace(target)
+        finally:
+            if temp_path is not None:
+                temp_path.unlink(missing_ok=True)
